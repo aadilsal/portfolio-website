@@ -2,26 +2,127 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .grid-overlay {
+    background-image:
+      linear-gradient(rgba(234, 234, 234, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(234, 234, 234, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .panel-border {
+    @apply border border-border rounded-lg bg-card/80 backdrop-blur-sm;
+  }
+
+  .stagger-fade > * {
+    opacity: 0;
+    animation: fade-up 0.5s ease-out forwards;
+  }
+  .stagger-fade > *:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+  .stagger-fade > *:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .stagger-fade > *:nth-child(3) {
+    animation-delay: 0.15s;
+  }
+  .stagger-fade > *:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+  .stagger-fade > *:nth-child(5) {
+    animation-delay: 0.25s;
+  }
+  .stagger-fade > *:nth-child(6) {
+    animation-delay: 0.3s;
+  }
+  .stagger-fade > *:nth-child(7) {
+    animation-delay: 0.35s;
+  }
+  .stagger-fade > *:nth-child(8) {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-f1-rpm {
+  0%,
+  100% {
+    stroke-dashoffset: 28;
+    opacity: 0.85;
+  }
+  50% {
+    stroke-dashoffset: 8;
+    opacity: 1;
+  }
+}
+
+.hero-f1-rpm-sweep {
+  animation: hero-f1-rpm 2.8s ease-in-out infinite;
+}
+
+@keyframes hero-f1-ers {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.02);
+  }
+}
+
+.hero-f1-ers {
+  transform-origin: left center;
+  animation: hero-f1-ers 2.2s ease-in-out infinite;
+}
+
+@keyframes hero-f1-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(16deg);
+  }
+  75% {
+    transform: rotate(-8deg);
+  }
+}
+
+.hero-f1-wave {
+  transform-origin: 20% 80%;
+  animation: hero-f1-wave 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-f1-rpm-sweep,
+  .hero-f1-ers,
+  .hero-f1-wave {
+    animation: none;
   }
 }

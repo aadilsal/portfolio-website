@@ -1,0 +1,160 @@
+{
+  "name": "Aadil Salman Butt",
+  "location": "Lahore, Pakistan",
+  "email": "aadilsalman786@gmail.com",
+  "phone": "+92 303 5116528",
+  "github": "https://github.com/aadilsal",
+  "portfolio": "https://aadilsalmanportfolio.vercel.app/",
+  "role": "AI Systems Engineer",
+  "heroAvatar": "/lottie/p.jpg",
+  "summary": "Full-Stack Software Engineer specializing in scalable web applications, AI/ML systems, and MLOps pipelines. Experienced in building production-grade chatbots, voice assistants, and integrating payment systems. Strong background in React, Next.js, Node.js, Python, and cloud-based deployments.",
+
+  "contact": {
+    "email": "aadilsalman786@gmail.com",
+    "github": "https://github.com/aadilsal",
+    "githubHandle": "aadilsal"
+  },
+
+  "skills": {
+    "frontend": [
+      "JavaScript",
+      "TypeScript",
+      "React.js",
+      "Next.js",
+      "HTML5",
+      "CSS3",
+      "Responsive Design",
+      "Shadcn UI"
+    ],
+    "backend": [
+      "Node.js",
+      "Django",
+      "ASP.NET",
+      "REST APIs",
+      "Microservices",
+      "MongoDB",
+      "MS SQL Server",
+      "Python",
+      "C#",
+      "SQL"
+    ],
+    "ai": [
+      "Machine Learning",
+      "LLMs",
+      "RAG",
+      "FAISS",
+      "Predictive Modeling",
+      "Chatbots",
+      "Voice Assistants"
+    ],
+    "cloud": [
+      "Model Deployment",
+      "Automated Retraining",
+      "AWS",
+      "CI/CD",
+      "Docker",
+      "Git",
+      "Linux",
+      "Jira",
+      "Agile/Scrum",
+      "Testing"
+    ]
+  },
+
+  "experience": [
+    {
+      "company": "ILMVERSITY (Da1ilmverse)",
+      "role": "Associate Software Engineer",
+      "duration": "Oct 2025 – Present",
+      "points": [
+        "Built full-stack web applications using React, Next.js, and Node.js delivering seamless user experiences",
+        "Developed chatbots and voice assistants to enhance engagement and automate support",
+        "Integrated Stripe, Chase Bank, and KuickPay improving payment reliability",
+        "Optimized frontend performance and backend APIs to improve speed and responsiveness",
+        "Created reusable UI components and scalable design patterns",
+        "Collaborated with cross-functional teams to deliver production-grade features"
+      ]
+    },
+    {
+      "company": "Fiveriver Technologies",
+      "role": "Web Development Intern",
+      "duration": "Jul 2023 – Mar 2024",
+      "points": [
+        "Built responsive frontend features using JavaScript and React",
+        "Developed API-driven applications with MongoDB backend",
+        "Refactored legacy code and implemented unit testing to reduce technical debt"
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "ApexFlow",
+      "tagline": "Real-time MLOps Platform inspired by Formula 1 systems",
+      "description": "End-to-end MLOps system for real-time lap-time prediction with automated retraining and low-latency inference.",
+      "features": [
+        "Real-time prediction pipeline",
+        "Automated retraining system",
+        "Low-latency inference architecture",
+        "High reliability under time-sensitive conditions"
+      ],
+      "category": "AI / MLOps"
+    },
+    {
+      "name": "LegalMindRAG",
+      "tagline": "AI-powered legal intelligence system",
+      "description": "RAG-based system combining FAISS vector search with LLMs to provide accurate, source-grounded legal answers.",
+      "features": [
+        "Vector search with FAISS",
+        "LLM-powered responses",
+        "Source-grounded answer generation"
+      ],
+      "category": "AI / NLP"
+    },
+    {
+      "name": "Finbotics",
+      "tagline": "AI-driven financial analytics platform",
+      "description": "Full-stack analytics dashboard integrating machine learning forecasts for actionable insights.",
+      "features": [
+        "Interactive dashboards",
+        "ML-based forecasting",
+        "Data visualization"
+      ],
+      "category": "Full Stack / AI"
+    },
+    {
+      "name": "MotorAI",
+      "tagline": "Intelligent AI-powered car marketplace",
+      "description": "Marketplace platform with image-based car analysis, intelligent search, and admin tooling.",
+      "features": [
+        "AI-based image analysis",
+        "Advanced search system",
+        "Admin dashboard"
+      ],
+      "category": "AI / Full Stack"
+    }
+  ],
+
+  "education": [
+    {
+      "institution": "National University of Computer & Emerging Sciences (FAST), Lahore",
+      "degree": "BS Computer Science",
+      "duration": "Aug 2022 – Present"
+    },
+    {
+      "institution": "Lahore Grammar School, Johar Town",
+      "degree": "A Levels",
+      "duration": "Aug 2020 – Jun 2022"
+    },
+    {
+      "institution": "Beaconhouse School System, Garden Town",
+      "degree": "O Levels",
+      "duration": "Aug 2017 – Jun 2020"
+    }
+  ],
+
+  "certifications": [
+    "AWS Academy Cloud Foundations",
+    "Digital Skills: Artificial Intelligence (FutureLearn)"
+  ]
+}
