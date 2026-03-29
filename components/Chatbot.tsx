@@ -72,7 +72,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: "assistant",
-      text: "Ask about experience, skills, or any public GitHub repo (loaded live).",
+      text: "Ask about experience, case studies (ApexFlow, LegalMindRAG, ResearchOS, …), skills, or any public GitHub repo loaded live. For roles or consulting, say what you are hiring for.",
     },
   ]);
   const endRef = useRef<HTMLDivElement>(null);
@@ -135,7 +135,7 @@ export default function Chatbot() {
           >
             <div className="flex items-center justify-between border-b border-border px-4 py-3">
               <span className="font-mono text-xs uppercase tracking-wider text-secondary">
-                Groq assistant
+                Pit Wall
               </span>
               <button
                 type="button"

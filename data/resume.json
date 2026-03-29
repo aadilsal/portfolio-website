@@ -7,12 +7,15 @@
   "portfolio": "https://aadilsalmanportfolio.vercel.app/",
   "role": "Full Stack Engineer",
   "heroAvatar": "/lottie/p.jpg",
-  "summary": "Full-Stack Software Engineer specializing in scalable web applications, AI/ML systems, and MLOps pipelines. Experienced in building production-grade chatbots, voice assistants, and integrating payment systems. Strong background in React, Next.js, Node.js, Python, and cloud-based deployments.",
+  "summary": "I design and build production web and AI systems—full stack from APIs and data to UX—for teams that need reliability, not demos. Experienced with scalable apps, RAG and LLM integrations, MLOps-style pipelines, payments, and performance-minded delivery.",
+
+  "availability": "Open to senior full-time roles and selective consulting on product builds and AI integrations.",
 
   "contact": {
     "email": "aadilsalman786@gmail.com",
     "github": "https://github.com/aadilsal",
-    "githubHandle": "aadilsal"
+    "githubHandle": "aadilsal",
+    "whatsapp": "923035116528"
   },
 
   "skills": {

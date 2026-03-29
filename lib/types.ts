@@ -1,7 +1,22 @@
+export type CaseStudy = {
+  repo: string;
+  repoUrl: string;
+  title: string;
+  tagline: string;
+  category: string;
+  problem: string;
+  role: string;
+  approach: string;
+  stack: string[];
+  outcome: string;
+};
+
 export type Resume = {
   name: string;
   role: string;
   summary: string;
+  /** One line for senior roles + freelance (shown under summary when set). */
+  availability?: string;
   /** Local path (e.g. `/avatar.jpg`) or image URL for hero pit-wall avatar */
   heroAvatar?: string;
   skills: {
@@ -34,6 +49,8 @@ export type Resume = {
     github: string;
     githubHandle: string;
     linkedin?: string;
+    /** WhatsApp number, digits only (e.g. 923035116528 for Pakistan). */
+    whatsapp?: string;
   };
   /** Shown when GitHub API returns no repos (e.g. rate limit, offline). */
   projects?: {

@@ -4,7 +4,8 @@ import { HeroTyping } from "@/components/HeroTyping";
 import { Button } from "@/components/ui/button";
 import type { Resume } from "@/lib/types";
 
-const TYPING_LINE = "AI Systems · Full-Stack · MLOps · Race-ready delivery";
+const TYPING_LINE =
+  "Production web · AI & RAG · MLOps · Payments · Race-ready delivery";
 
 export function Hero({ resume }: { resume: Resume }) {
   return (
@@ -17,7 +18,7 @@ export function Hero({ resume }: { resume: Resume }) {
         <div className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(220px,380px)] lg:gap-10">
           <div className="relative max-w-3xl space-y-6">
             <p className="font-mono text-xs uppercase tracking-[0.35em] text-muted-foreground">
-              Race control / Entry
+              Overview
             </p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-balance">
               {(() => {
@@ -38,10 +39,13 @@ export function Hero({ resume }: { resume: Resume }) {
             <HeroTyping text={TYPING_LINE} />
             <div className="flex flex-wrap gap-3 pt-4">
               <Button asChild>
-                <a href="#driver">Driver profile</a>
+                <a href="#case-studies">Selected work</a>
               </Button>
               <Button variant="secondary" asChild>
-                <a href="#projects">Projects</a>
+                <a href="#contact">Get in touch</a>
+              </Button>
+              <Button variant="ghost" asChild className="font-mono text-xs">
+                <a href="#driver">Profile</a>
               </Button>
             </div>
           </div>

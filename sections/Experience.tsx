@@ -21,6 +21,10 @@ export function Experience({ resume }: { resume: Resume }) {
             Race history
           </span>
           <h2 className="text-3xl font-semibold tracking-tight">Experience</h2>
+          <p className="max-w-2xl text-muted-foreground">
+            Roles where I owned delivery across the stack: product-facing
+            features, integrations, AI assistants, payments, and performance.
+          </p>
         </div>
         <ol className="relative space-y-8 border-l border-border pl-8">
           {resume.experience.map((job, index) => (

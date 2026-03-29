@@ -1,6 +1,7 @@
+import caseStudiesData from "@/data/case-studies.json";
 import { sanitizeChatReply } from "@/lib/chatReply";
 import { resolveContact } from "@/lib/contact";
-import type { MergedProject, Resume } from "@/lib/types";
+import type { CaseStudy, MergedProject, Resume } from "@/lib/types";
 
 const REPO_DESC_MAX = 420;
 const REPOS_CONTEXT_MAX_CHARS = 14_000;
@@ -32,6 +33,24 @@ function buildReposContext(projects: MergedProject[]): string {
   ].join("\n");
 }
 
+function buildCaseStudiesContext(): string {
+  const studies = caseStudiesData.studies as CaseStudy[];
+  if (!studies.length) {
+    return "Case studies: none in data/case-studies.json.";
+  }
+  const blocks = studies.map(
+    (s) =>
+      `### ${s.title} (repo: ${s.repo}, ${s.repoUrl})\n` +
+      `Category: ${s.category}. ${s.tagline}\n` +
+      `Problem: ${s.problem}\n` +
+      `Role: ${s.role}\n` +
+      `Approach: ${s.approach}\n` +
+      `Stack: ${s.stack.join(", ")}\n` +
+      `Outcome: ${s.outcome}`
+  );
+  return `Published case studies (narrative on the portfolio site; use for depth questions):\n\n${blocks.join("\n\n")}`;
+}
+
 function buildResumeContext(resume: Resume): string {
   const contact = resolveContact(resume);
   const skillLines = Object.entries(resume.skills)
@@ -43,16 +62,26 @@ function buildResumeContext(resume: Resume): string {
         `${e.role} at ${e.company} (${e.duration}): ${e.points.join("; ")}`
     )
     .join("\n");
+  const availability = resume.availability
+    ? `Availability note: ${resume.availability}`
+    : "";
+  const wa =
+    contact.whatsappHref != null
+      ? " WhatsApp contact link is on the portfolio contact section."
+      : "";
   return [
     `Name: ${resume.name}`,
     `Role: ${resume.role}`,
     `Summary: ${resume.summary}`,
+    availability,
     `Skills:\n${skillLines}`,
     `Experience:\n${exp}`,
     `Education: ${resume.education.map((x) => `${x.degree}, ${x.institution} (${x.duration})`).join("; ")}`,
     `Certifications: ${resume.certifications.join(", ")}`,
-    `Contact: GitHub ${contact.githubHandle}, email on request.`,
-  ].join("\n\n");
+    `Contact: email ${contact.email}, GitHub ${contact.githubHandle}.${wa}`,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 }
 
 export async function askAI(
@@ -67,7 +96,8 @@ export async function askAI(
 
   const resumeBlock = buildResumeContext(resume);
   const reposBlock = buildReposContext(projects);
-  const context = `${resumeBlock}\n\n---\n\n${reposBlock}`;
+  const caseStudiesBlock = buildCaseStudiesContext();
+  const context = `${resumeBlock}\n\n---\n\n${caseStudiesBlock}\n\n---\n\n${reposBlock}`;
 
   const model =
     process.env.GROQ_MODEL?.trim() || "llama-3.1-8b-instant";
@@ -85,10 +115,11 @@ export async function askAI(
           role: "system",
           content: `You are a professional assistant representing ${resume.name}, ${resume.role}.
 
-Use ONLY the two blocks below: (1) resume / profile facts, (2) GitHub repositories loaded at request time.
-For career, skills, education, certifications: use the resume block.
+Use ONLY the blocks below: (1) resume / profile facts, (2) case study narratives from the portfolio site, (3) GitHub repositories loaded at request time.
+For career, skills, education, certifications, availability: use the resume block.
+For flagship project depth, problem/solution framing, or "how would you describe project X": use the case studies block when the project matches; otherwise use the GitHub block.
 For questions about repositories, tech stack of a repo, stars, topics, links, or what repos: use the GitHub block. Match by display name or slug. Do not invent repositories or URLs not listed.
-If something is not in the blocks, say you do not have that detail and suggest GitHub or email as appropriate.
+If something is not in the blocks, say you do not have that detail and suggest GitHub, WhatsApp, or email as appropriate for contact.
 
 Output formatting (required):
 Plain text only. Do not use markdown, asterisks, hash marks, backticks, angle brackets, or emoji for emphasis or structure.

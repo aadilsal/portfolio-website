@@ -19,9 +19,9 @@ export function Metrics({ resume, projects }: Props) {
             Performance
           </span>
           <h2 className="text-3xl font-semibold tracking-tight">Metrics</h2>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground max-w-2xl">
             {resume.metrics?.projectsBuiltNote ??
-              "Approximate indicators from public GitHub data."}
+              "At-a-glance signals from public GitHub activity—best read together with case studies and experience above."}
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-3">

@@ -14,13 +14,15 @@ export function GitHubFeed({ projects }: { projects: MergedProject[] }) {
           <h2 className="text-3xl font-semibold tracking-tight">
             GitHub activity
           </h2>
-          <p className="text-muted-foreground">
-            Recently updated repositories with at least one star.
+          <p className="max-w-2xl text-muted-foreground">
+            A live view of public repos I&apos;m actively maintaining—useful
+            for seeing where recent commits and iteration are happening.
           </p>
         </div>
         {projects.length === 0 ? (
           <p className="text-muted-foreground">
-            No starred public repositories in the feed window yet.
+            No qualifying activity in this snapshot yet—check the profile link
+            from Projects for the full repository list.
           </p>
         ) : (
           <ul className="stagger-fade space-y-3">

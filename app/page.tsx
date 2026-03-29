@@ -1,6 +1,8 @@
 import nextDynamic from "next/dynamic";
 import { Container } from "@/components/Container";
 import resumeData from "@/data/resume.json";
+import { getCaseStudyRepoSlugSet } from "@/lib/case-studies";
+import { resolveContact } from "@/lib/contact";
 import { getMergedProjects, sortByUpdated } from "@/lib/projects";
 import type { Resume } from "@/lib/types";
 import { About } from "@/sections/About";
@@ -11,6 +13,7 @@ import { Experience } from "@/sections/Experience";
 import { GitHubFeed } from "@/sections/GitHubFeed";
 import { Hero } from "@/sections/Hero";
 import { Metrics } from "@/sections/Metrics";
+import { CaseStudies } from "@/sections/CaseStudies";
 import { Projects } from "@/sections/Projects";
 
 const Chatbot = nextDynamic(() => import("@/components/Chatbot"), {
@@ -23,6 +26,14 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const projects = await getMergedProjects(resume);
+  const caseStudySlugs = getCaseStudyRepoSlugSet();
+  const projectsForShowcase = projects.filter(
+    (p) => !caseStudySlugs.has(p.name.toLowerCase())
+  );
+  const allReposInCaseStudies =
+    projects.length > 0 && projectsForShowcase.length === 0;
+  const { github: githubProfileUrl } = resolveContact(resume);
+
   const feed = sortByUpdated(projects)
     .filter((p) => p.stargazers_count > 0)
     .slice(0, 8);
@@ -55,6 +66,14 @@ export default async function Home() {
               </li>
               <li>
                 <a
+                  href="#case-studies"
+                  className="hover:text-secondary transition-colors"
+                >
+                  Work
+                </a>
+              </li>
+              <li>
+                <a
                   href="#projects"
                   className="hover:text-secondary transition-colors"
                 >
@@ -78,7 +97,12 @@ export default async function Home() {
         <Hero resume={resume} />
         <About resume={resume} />
         <Architecture resume={resume} />
-        <Projects projects={projects} />
+        <CaseStudies />
+        <Projects
+          projects={projectsForShowcase}
+          allReposInCaseStudies={allReposInCaseStudies}
+          githubProfileUrl={githubProfileUrl}
+        />
         <GitHubFeed projects={feed} />
         <Experience resume={resume} />
         <EducationCerts resume={resume} />

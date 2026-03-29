@@ -1,0 +1,64 @@
+{
+  "studies": [
+    {
+      "repo": "ApexFlow",
+      "repoUrl": "https://github.com/aadilsal/ApexFlow",
+      "title": "ApexFlow",
+      "tagline": "Real-time MLOps for lap-time prediction",
+      "category": "AI / MLOps",
+      "problem": "Motorsport analytics need low-latency predictions and models that stay accurate as telemetry and track conditions change—batch notebooks are not enough on race weekend.",
+      "role": "End-to-end system design: data pipeline assumptions, training/retraining hooks, and deployment path suitable for time-sensitive inference.",
+      "approach": "Structured the platform around professional-style telemetry, automated retraining loops, and cloud-native orchestration so predictions can be refreshed without manual rewrites. Emphasized reliability boundaries between training, validation, and online inference.",
+      "stack": ["Python", "MLOps", "Cloud orchestration", "Real-time inference"],
+      "outcome": "Demonstrates production MLOps thinking beyond a single model file: lifecycle, automation, and operational constraints as first-class concerns—relevant to senior ML/platform roles and to clients shipping predictive products."
+    },
+    {
+      "repo": "LegalMindRAG",
+      "repoUrl": "https://github.com/aadilsal/LegalMindRAG",
+      "title": "LegalMindRAG",
+      "tagline": "RAG over legal corpora with grounded answers",
+      "category": "AI / NLP",
+      "problem": "Legal and policy questions need answers tied to real sources; generic LLM replies risk hallucination and low trust.",
+      "role": "Retrieval architecture, chunking and embedding strategy, and LLM prompting so outputs cite the underlying documents (e.g. Universal Declaration of Human Rights and related texts).",
+      "approach": "Combined vector search (FAISS) with an LLM layer for retrieval-augmented generation, focusing on source-grounded responses rather than open-ended generation. Tuned the pipeline for domain-appropriate retrieval quality.",
+      "stack": ["Python", "FAISS", "LLMs", "RAG"],
+      "outcome": "Shows how to ship trustworthy AI features where provenance matters—directly transferable to support bots, internal knowledge bases, and compliance-sensitive assistants for freelance or product teams."
+    },
+    {
+      "repo": "ResearchOS",
+      "repoUrl": "https://github.com/aadilsal/ResearchOS",
+      "title": "ResearchOS",
+      "tagline": "Multi-tenant SaaS with autonomous research agents",
+      "category": "Full Stack / AI",
+      "problem": "Turning open-ended research objectives into repeatable, professional outputs at scale requires background jobs, isolation between users, and agent orchestration—not a single synchronous API call.",
+      "role": "Full-stack product engineering on a modern stack: tenancy-aware workflows, async job processing, and agent graphs that decompose objectives into reports.",
+      "approach": "Built on Next.js 14 with Convex for data and LangGraph for agent flows, emphasizing multi-tenant safety and performance so research runs become a managed pipeline rather than ad hoc prompts.",
+      "stack": ["Next.js 14", "TypeScript", "Convex", "LangGraph"],
+      "outcome": "Signals senior-level SaaS and AI integration skills: auth/tenancy patterns, background work, and LLM orchestration—strong for senior full-stack roles and for consulting on AI-native products."
+    },
+    {
+      "repo": "Churn-Predictor",
+      "repoUrl": "https://github.com/aadilsal/Churn-Predictor",
+      "title": "Churn Predictor",
+      "tagline": "Explainable churn intelligence for retention teams",
+      "category": "ML / Analytics",
+      "problem": "Retention teams need more than accuracy—they need risk scores, drivers of churn, and interfaces that non-ML stakeholders can use.",
+      "role": "Modeling with gradient boosting, explainability layer, API surface, and a Streamlit experience for exploration and dashboards.",
+      "approach": "Used XGBoost with SHAP for interpretability, exposed predictions via FastAPI, and paired with Streamlit for interactive analysis so business users can act on insights.",
+      "stack": ["Python", "XGBoost", "SHAP", "FastAPI", "Streamlit"],
+      "outcome": "End-to-end ML product: from training to API to UI—exactly the kind of delivery clients pay for and hiring managers look for in senior data/ML engineers."
+    },
+    {
+      "repo": "Insight-OS",
+      "repoUrl": "https://github.com/aadilsal/Insight-OS",
+      "title": "InsightOS",
+      "tagline": "Natural language to safe SQL and CFO-style insights",
+      "category": "Full Stack / AI",
+      "problem": "Analysts and leaders want to ask questions in plain language without risking destructive SQL or leaking data across users.",
+      "role": "Designed per-user data isolation, read-only query execution, and NL-to-SQL (or equivalent) flows with background processing for heavier insight generation.",
+      "approach": "Users upload or connect schemas; the system constrains queries to safe, read-only operations and generates narrative insights suitable for finance-style reporting—balancing flexibility with guardrails.",
+      "stack": ["TypeScript", "SQL", "Background jobs", "LLM-assisted analytics"],
+      "outcome": "Demonstrates judgment on security and product shape for AI + data apps—valuable for enterprise-facing freelance work and senior backend/full-stack positions."
+    }
+  ]
+}

@@ -5,6 +5,8 @@ export type ResolvedContact = {
   github: string;
   githubHandle: string;
   linkedin?: string;
+  whatsapp?: string;
+  whatsappHref?: string;
 };
 
 type ResumeInput = Resume & { email?: string; github?: string };
@@ -21,10 +23,16 @@ export function resolveContact(resume: ResumeInput): ResolvedContact {
   const github = c?.github ?? resume.github ?? "";
   const githubHandle =
     c?.githubHandle ?? (github ? handleFromGithubUrl(github) : "");
+  const waDigits = c?.whatsapp?.replace(/\D/g, "") ?? "";
+  const whatsappHref =
+    waDigits.length >= 10 ? `https://wa.me/${waDigits}` : undefined;
+
   return {
     email,
     github,
     githubHandle: githubHandle || "github",
     linkedin: c?.linkedin,
+    whatsapp: waDigits || undefined,
+    whatsappHref,
   };
 }

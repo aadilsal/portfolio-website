@@ -25,7 +25,8 @@ export function Architecture({ resume }: { resume: Resume }) {
             System architecture
           </h2>
           <p className="max-w-2xl text-muted-foreground">
-            Capability map — hover a layer to highlight the stack.
+            Technologies I use to ship products end to end—from interfaces and
+            APIs to AI, data, and cloud operations. Hover a layer to explore.
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">

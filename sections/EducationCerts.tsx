@@ -12,6 +12,10 @@ export function EducationCerts({ resume }: { resume: Resume }) {
           <h2 className="text-3xl font-semibold tracking-tight">
             Education & certifications
           </h2>
+          <p className="max-w-2xl text-muted-foreground">
+            Academic background and formal credentials alongside hands-on
+            engineering and product delivery.
+          </p>
         </div>
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
