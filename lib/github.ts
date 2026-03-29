@@ -17,7 +17,7 @@ export async function getRepos(): Promise<GitHubRepo[]> {
     `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`,
     {
       headers,
-      next: { revalidate: 86400 },
+      cache: "no-store",
     }
   );
 

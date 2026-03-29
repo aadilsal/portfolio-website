@@ -12,8 +12,9 @@ export function Projects({ projects }: { projects: MergedProject[] }) {
           </span>
           <h2 className="text-3xl font-semibold tracking-tight">Projects</h2>
           <p className="max-w-2xl text-muted-foreground">
-            Descriptions use each repo’s GitHub summary (About). Merged with
-            local metadata. Stars and topics refresh on a 24h cache.
+            Descriptions use each repo’s GitHub summary (About), merged with
+            local metadata. Repo data is loaded from GitHub when you open this
+            page.
           </p>
         </div>
         {projects.length === 0 ? (

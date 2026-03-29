@@ -6,7 +6,62 @@ import { MessageCircle, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { parseAssistantBlocks, sanitizeChatReply } from "@/lib/chatReply";
 import { cn } from "@/lib/utils";
+
+function AssistantMessageBody({ text }: { text: string }) {
+  const clean = sanitizeChatReply(text);
+  const blocks = parseAssistantBlocks(clean);
+  if (blocks.length === 0) {
+    return clean ? (
+      <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
+        {clean}
+      </p>
+    ) : null;
+  }
+  return (
+    <div className="space-y-3 text-left">
+      {blocks.map((b, i) => {
+        if (b.type === "paragraph") {
+          return (
+            <p
+              key={i}
+              className="text-sm leading-relaxed text-foreground/90 first:mt-0"
+            >
+              {b.text}
+            </p>
+          );
+        }
+        if (b.type === "bullets") {
+          return (
+            <ul
+              key={i}
+              className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-foreground/85 [list-style-position:outside]"
+            >
+              {b.items.map((item, j) => (
+                <li key={j} className="pl-0.5 marker:text-muted-foreground">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          );
+        }
+        return (
+          <ol
+            key={i}
+            className="list-decimal space-y-3 pl-5 text-sm leading-relaxed text-foreground/85 [list-style-position:outside]"
+          >
+            {b.items.map((item, j) => (
+              <li key={j} className="pl-0.5 marker:text-muted-foreground">
+                {item}
+              </li>
+            ))}
+          </ol>
+        );
+      })}
+    </div>
+  );
+}
 
 type Msg = { role: "user" | "assistant"; text: string };
 
@@ -103,7 +158,11 @@ export default function Chatbot() {
                         : "mr-6 border border-border bg-background/60 text-muted-foreground"
                     )}
                   >
-                    {m.text}
+                    {m.role === "assistant" ? (
+                      <AssistantMessageBody text={m.text} />
+                    ) : (
+                      m.text
+                    )}
                   </div>
                 ))}
                 {loading && (

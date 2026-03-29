@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import { Container } from "@/components/Container";
 import resumeData from "@/data/resume.json";
 import { getMergedProjects, sortByUpdated } from "@/lib/projects";
@@ -13,9 +13,13 @@ import { Hero } from "@/sections/Hero";
 import { Metrics } from "@/sections/Metrics";
 import { Projects } from "@/sections/Projects";
 
-const Chatbot = dynamic(() => import("@/components/Chatbot"), { ssr: false });
+const Chatbot = nextDynamic(() => import("@/components/Chatbot"), {
+  ssr: false,
+});
 
 const resume = resumeData as Resume;
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const projects = await getMergedProjects(resume);

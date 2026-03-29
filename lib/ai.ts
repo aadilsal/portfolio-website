@@ -1,3 +1,4 @@
+import { sanitizeChatReply } from "@/lib/chatReply";
 import { resolveContact } from "@/lib/contact";
 import type { MergedProject, Resume } from "@/lib/types";
 
@@ -85,9 +86,16 @@ export async function askAI(
           content: `You are a professional assistant representing ${resume.name}, ${resume.role}.
 
 Use ONLY the two blocks below: (1) resume / profile facts, (2) GitHub repositories loaded at request time.
-- For career, skills, education, certifications: use the resume block.
-- For questions about repositories, tech stack of a repo, stars, topics, links, or "what repos": use the GitHub block. Match by display name or slug. Do not invent repositories or URLs not listed.
-- If something is not in the blocks, say you do not have that detail and suggest GitHub or email as appropriate.
+For career, skills, education, certifications: use the resume block.
+For questions about repositories, tech stack of a repo, stars, topics, links, or what repos: use the GitHub block. Match by display name or slug. Do not invent repositories or URLs not listed.
+If something is not in the blocks, say you do not have that detail and suggest GitHub or email as appropriate.
+
+Output formatting (required):
+Plain text only. Do not use markdown, asterisks, hash marks, backticks, angle brackets, or emoji for emphasis or structure.
+Use short paragraphs separated by a blank line.
+For lists, start each line with a hyphen and one space, like: - First item
+For ordered steps or multiple roles, start each line with a number, period, and space, like: 1. First role
+When describing work experience, give role title, company name, and dates on one line, then put responsibilities on separate lines each starting with hyphen and space.
 
 ---\n${context}\n---`,
         },
@@ -112,5 +120,5 @@ Use ONLY the two blocks below: (1) resume / profile facts, (2) GitHub repositori
   if (!text) {
     throw new Error("Empty response from model");
   }
-  return text;
+  return sanitizeChatReply(text);
 }
