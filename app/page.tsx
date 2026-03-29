@@ -1,8 +1,10 @@
 import nextDynamic from "next/dynamic";
 import { Container } from "@/components/Container";
+import { HeroAvatar } from "@/components/HeroAvatar";
 import resumeData from "@/data/resume.json";
 import { getCaseStudyRepoSlugSet } from "@/lib/case-studies";
 import { resolveContact } from "@/lib/contact";
+import { getSearchCommitTotal } from "@/lib/github";
 import { getMergedProjects, sortByUpdated } from "@/lib/projects";
 import type { Resume } from "@/lib/types";
 import { About } from "@/sections/About";
@@ -25,7 +27,10 @@ const resume = resumeData as Resume;
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const projects = await getMergedProjects(resume);
+  const [projects, commitIndexTotal] = await Promise.all([
+    getMergedProjects(resume),
+    getSearchCommitTotal(),
+  ]);
   const caseStudySlugs = getCaseStudyRepoSlugSet();
   const projectsForShowcase = projects.filter(
     (p) => !caseStudySlugs.has(p.name.toLowerCase())
@@ -45,10 +50,16 @@ export default async function Home() {
           <nav className="flex h-14 items-center justify-between gap-4">
             <a
               href="#hero"
-              className="font-mono text-xs uppercase tracking-[0.2em] text-foreground"
+              className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.2em] text-foreground"
             >
-              {resume.name.split(" ")[0]}
-              <span className="text-accent">.</span>
+              <HeroAvatar
+                resume={resume}
+                className="!h-8 !w-8 ring-1 ring-offset-1 ring-offset-background"
+              />
+              <span>
+                {resume.name.split(" ")[0]}
+                <span className="text-accent">.</span>
+              </span>
             </a>
             <ul className="hidden gap-6 font-mono text-[11px] uppercase tracking-wider text-muted-foreground sm:flex">
               <li>
@@ -106,7 +117,11 @@ export default async function Home() {
         <GitHubFeed projects={feed} />
         <Experience resume={resume} />
         <EducationCerts resume={resume} />
-        <Metrics resume={resume} projects={projects} />
+        <Metrics
+          resume={resume}
+          projects={projects}
+          commitIndexTotal={commitIndexTotal}
+        />
         <Contact resume={resume} />
       </main>
 

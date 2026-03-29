@@ -15,9 +15,10 @@ export type Resume = {
   name: string;
   role: string;
   summary: string;
+  location?: string;
   /** One line for senior roles + freelance (shown under summary when set). */
   availability?: string;
-  /** Local path (e.g. `/avatar.jpg`) or image URL for hero pit-wall avatar */
+  /** Local path (e.g. `/avatar.jpg`) or image URL for hero / nav avatar */
   heroAvatar?: string;
   skills: {
     frontend: string[];
