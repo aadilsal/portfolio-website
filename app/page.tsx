@@ -39,9 +39,7 @@ export default async function Home() {
     projects.length > 0 && projectsForShowcase.length === 0;
   const { github: githubProfileUrl } = resolveContact(resume);
 
-  const feed = sortByUpdated(projects)
-    .filter((p) => p.stargazers_count > 0)
-    .slice(0, 8);
+  const feed = sortByUpdated(projects).slice(0, 3);
 
   return (
     <>
