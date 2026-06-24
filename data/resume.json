@@ -8,16 +8,13 @@
   "role": "Full Stack Engineer",
   "heroAvatar": "/lottie/p.jpg",
   "summary": "I design and build production web and AI systems—full stack from APIs and data to UX—for teams that need reliability, not demos. Experienced with scalable apps, RAG and LLM integrations, MLOps-style pipelines, payments, and performance-minded delivery.",
-
   "availability": "Open to senior full-time roles and selective consulting on product builds and AI integrations.",
-
   "contact": {
     "email": "aadilsalman786@gmail.com",
     "github": "https://github.com/aadilsal",
     "githubHandle": "aadilsal",
     "whatsapp": "923035116528"
   },
-
   "skills": {
     "frontend": [
       "JavaScript",
@@ -63,7 +60,6 @@
       "Testing"
     ]
   },
-
   "experience": [
     {
       "company": "ILMVERSITY (Da1ilmverse)",
@@ -89,7 +85,6 @@
       ]
     }
   ],
-
   "projects": [
     {
       "name": "ApexFlow",
@@ -137,12 +132,11 @@
       "category": "AI / Full Stack"
     }
   ],
-
   "education": [
     {
       "institution": "National University of Computer & Emerging Sciences (FAST), Lahore",
       "degree": "BS Computer Science",
-      "duration": "Aug 2022 – Present"
+      "duration": "Aug 2022 – Jun 2026"
     },
     {
       "institution": "Lahore Grammar School, Johar Town",
@@ -155,7 +149,6 @@
       "duration": "Aug 2017 – Jun 2020"
     }
   ],
-
   "certifications": [
     "AWS Academy Cloud Foundations",
     "Digital Skills: Artificial Intelligence (FutureLearn)"
