@@ -1,44 +1,46 @@
-import { Container } from "@/components/Container";
-import type { Resume } from "@/lib/types";
+import Image from "next/image";
+import { Reveal } from "@/components/Reveal";
+import { SectionHeader } from "@/components/SectionHeader";
+import { resume } from "@/lib/site";
 
-export function About({ resume }: { resume: Resume }) {
+export function About() {
+  const facts = [
+    {
+      term: "Education",
+      detail: `${resume.education.degree}, ${resume.education.institution}, ${resume.education.dates}`,
+    },
+    { term: "Certificates", detail: resume.certifications.join(". ") },
+    { term: "Based in", detail: `${resume.location}, ${resume.timezone}` },
+  ];
+
   return (
-    <section id="driver" className="py-24 scroll-mt-20">
-      <Container>
-        <div className="mb-10 flex flex-col gap-2">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-secondary">
-            Driver profile
-          </span>
-          <h2 className="text-3xl font-semibold tracking-tight">About</h2>
-          <p className="max-w-2xl text-muted-foreground">
-            Who I am, what I focus on, and how I prefer to work with teams and
-            clients.
+    <section id="about" aria-labelledby="about-title" className="section page grid gap-12 lg:grid-cols-2">
+      <SectionHeader id="about-title" number="04" label="About" title="I like owning a feature from the schema to the button.">
+        {resume.about.map((p, i) => (
+          <p key={i} className="mt-5 max-w-[50ch] text-[17px] text-text-muted" style={{ "--i": 2 + i } as React.CSSProperties}>
+            {p}
           </p>
+        ))}
+      </SectionHeader>
+      <Reveal>
+        <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-line bg-surface">
+          <Image
+            src={resume.portrait}
+            alt={`Portrait of ${resume.name}`}
+            fill
+            sizes="(min-width: 1024px) 560px, 100vw"
+            className="object-cover object-[50%_25%]"
+          />
         </div>
-        <div className="panel-border p-6 sm:p-8 shadow-glow">
-          <div className="grid gap-6 sm:grid-cols-[1fr_2fr] sm:gap-10">
-            <div className="space-y-2">
-              <p className="font-mono text-xs text-muted-foreground">Name</p>
-              <p className="text-xl font-medium">{resume.name}</p>
-              <p className="font-mono text-xs text-muted-foreground pt-4">Role</p>
-              <p className="text-secondary">{resume.role}</p>
+        <dl className="mt-6" style={{ "--i": 1 } as React.CSSProperties}>
+          {facts.map((f) => (
+            <div key={f.term} className="grid grid-cols-[110px_1fr] gap-4 border-t border-line py-3 text-[15px]">
+              <dt className="font-mono text-[12px] leading-6 text-text-dim">{f.term}</dt>
+              <dd>{f.detail}</dd>
             </div>
-            <div>
-              <p className="font-mono text-xs text-muted-foreground mb-2">
-                Professional summary
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                {resume.summary}
-              </p>
-              {resume.availability && (
-                <p className="mt-4 border-l-2 border-accent/50 pl-4 text-sm text-secondary leading-relaxed">
-                  {resume.availability}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      </Container>
+          ))}
+        </dl>
+      </Reveal>
     </section>
   );
 }

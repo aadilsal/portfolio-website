@@ -1,10 +1,7 @@
 import type { Config } from "tailwindcss";
-import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
-  darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./sections/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,39 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0A0A0A",
-        foreground: "#EAEAEA",
-        accent: "#FF2E2E",
-        secondary: "#00E5FF",
-        border: "rgba(234, 234, 234, 0.12)",
-        card: "#111111",
-        muted: "#737373",
-        "muted-foreground": "#9CA3AF",
+        bg: "#0D0E10",
+        surface: { DEFAULT: "#15171A", raised: "#24282E" },
+        line: { DEFAULT: "#2A2E34", strong: "#3A3F47" },
+        text: { DEFAULT: "#F1F2F3", muted: "#A3A9B1", dim: "#858C95" },
+        accent: "#FF6A3D",
+        live: "#5BD68A",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        display: ["var(--font-bricolage)", "Helvetica Neue", "sans-serif"],
+        sans: ["var(--font-plex)", "Segoe UI", "system-ui", "sans-serif"],
+        mono: ["var(--font-jetbrains)", "ui-monospace", "monospace"],
       },
-      boxShadow: {
-        glow: "0 0 40px -10px rgba(255, 46, 46, 0.25)",
-        "glow-cyan": "0 0 32px -8px rgba(0, 229, 255, 0.2)",
-      },
-      keyframes: {
-        "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(12px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        blink: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0" },
-        },
-      },
-      animation: {
-        "fade-up": "fade-up 0.6s ease-out forwards",
-        blink: "blink 1s step-end infinite",
-      },
+      maxWidth: { page: "1200px" },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [],
 };
 export default config;

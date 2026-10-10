@@ -1,90 +1,49 @@
-# Aadil Portfolio — AI Systems Dashboard
+# Aadil Salman Butt, portfolio
 
-High-performance personal portfolio: F1-inspired dark UI, JSON-driven resume, GitHub projects with ISR, and a Groq-powered chat assistant.
+A proof-first portfolio: a homepage with three flagship builds, a skills matrix where every level has evidence, and a case study page per flagship. A Groq-backed assistant in the hero answers questions about the work and cites where each answer comes from.
 
-## Tech stack
+Live: https://aadilsalmanportfolio.vercel.app
 
-- [Next.js 14](https://nextjs.org/) (App Router, Server Components)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/) + [tailwindcss-animate](https://github.com/jamiebuilds/tailwindcss-animate)
-- [shadcn/ui](https://ui.shadcn.com/)-style primitives (Radix: Dialog, Scroll Area)
-- [Framer Motion](https://www.framer.com/motion/) (scoped to modals, timelines, chat)
-- [Groq](https://groq.com/) OpenAI-compatible API (`mixtral-8x7b-32768`)
-- [GitHub REST API](https://docs.github.com/en/rest)
+## Stack
 
-## Features
+- Next.js 14 App Router, TypeScript, Tailwind CSS
+- Motion (`motion/react`) for the two pointer-driven springs: screenshot tilt and the skills stack lean. Everything else is CSS.
+- `next-view-transitions` for the screenshot morph from the homepage to a case study
+- Groq (`openai/gpt-oss-120b`, falling back to `openai/gpt-oss-20b`) streamed through `POST /api/chat`
+- Vercel Analytics for page views and five events: résumé download, case study view, live site click, assistant question, contact click
 
-- **Hero** with typing line and anchor CTAs  
-- **Driver profile** (About) and **system architecture** (skills grid) from `data/resume.json`  
-- **Projects**: merged GitHub repos + `data/projects-meta.json` (featured, titles, categories, sort)  
-- **Live GitHub feed** (recently updated repos)  
-- **Experience** timeline and **education / certifications**  
-- **Metrics** derived from resume + repo list  
-- **Contact** with mail and social links  
-- **Floating chatbot** → `POST /api/chat` (resume-grounded system prompt)
+## Content
 
-## Project structure
+All copy is hand-written data, not pulled from GitHub.
 
-```text
-app/
-  layout.tsx          # Fonts (next/font), metadata, JSON-LD
-  page.tsx            # Composes sections; lazy-loads Chatbot
-  globals.css         # Design tokens & utilities
-  api/github/route.ts # GET merged repos (shared lib + ISR)
-  api/chat/route.ts   # POST Groq assistant
-components/           # UI + Chatbot + ProjectShowcase
-sections/             # Page sections (mostly Server Components)
-data/
-  resume.json         # Copy, skills, experience, contact
-  projects-meta.json  # Per-repo overrides (key = repo name lowercased)
-lib/
-  github.ts           # Fetch user repos, 24h revalidate
-  projects.ts         # Merge + sort
-  ai.ts               # Groq client + resume context
-```
+| File | What it holds |
+|------|---------------|
+| `data/resume.json` | Hero copy, proof strip, experience, about, education, contact |
+| `data/projects.ts` | Flagship projects with their case studies, plus the "More work" cards |
+| `data/skills.ts` | Skill rows: level, tier and proof |
+| `public/work/<slug>/*.webp` | Screenshots |
+| `public/resume.pdf` | The downloadable résumé |
 
-## Getting started
+The assistant's system prompt is built from the same three data files (`lib/assistant.ts`), so the site and the assistant can't drift apart.
+
+## Routes
+
+`/`, `/work/junket-tours`, `/work/dentalai-receptionist`, `/work/apexflow`, `/resume.pdf`, `/api/chat`, `/opengraph-image`, `/sitemap.xml`, `/robots.txt`
+
+## Develop
 
 ```bash
 npm install
+cp .env.example .env.local   # add GROQ_API_KEY
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-```bash
-npm run build   # production build
-npm run start   # run production server
-npm run lint    # ESLint
-```
+`npm run build`, `npm run start` and `npm run lint` work as usual.
 
 ## Environment variables
 
-Copy [`.env.example`](.env.example) to `.env.local` and set:
-
 | Variable | Required | Purpose |
 |----------|----------|---------|
-| `GROQ_API_KEY` | For chat | Groq API key for `/api/chat` |
-| `GITHUB_TOKEN` | Optional | Higher GitHub API rate limits (recommended in production) |
-| `NEXT_PUBLIC_GITHUB_USER` | Optional | GitHub username for repos (default: `aadilsal`) |
-
-## Editing content
-
-- **Bio, skills, jobs, education, contact**: edit [`data/resume.json`](data/resume.json).  
-- **Project titles, featured flag, category, priority**: edit [`data/projects-meta.json`](data/projects-meta.json) (object keys must match repository names in lowercase).
-
-## Performance notes
-
-- GitHub data uses `fetch` with `next: { revalidate: 86400 }` (ISR, 24 hours).  
-- Chatbot is loaded with `dynamic(..., { ssr: false })` so it is not in the initial server HTML.  
-- Prefer Tailwind/CSS motion; Framer Motion is limited to interactive or scroll-revealed slices.
-
-## Deploy on Vercel
-
-1. Push the repo to GitHub and import the project in [Vercel](https://vercel.com/new).  
-2. Add `GROQ_API_KEY` and optionally `GITHUB_TOKEN` / `NEXT_PUBLIC_GITHUB_USER` in **Project → Settings → Environment Variables**.  
-3. After you have a production URL, you can set `metadataBase` in [`app/layout.tsx`](app/layout.tsx) (or `NEXT_PUBLIC_SITE_URL` if you extend metadata) so Open Graph URLs resolve correctly.
-
-## License
-
-Private / personal portfolio — adjust as you prefer.
+| `GROQ_API_KEY` | For the assistant | Groq key for `/api/chat` |
+| `GROQ_MODEL` | No | Override the default model |
+| `NEXT_PUBLIC_SITE_URL` | No | Canonical address; defaults to `siteUrl` in `data/resume.json` |

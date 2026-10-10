@@ -1,156 +1,67 @@
 {
   "name": "Aadil Salman Butt",
-  "location": "Lahore, Pakistan",
-  "email": "aadilsalman786@gmail.com",
-  "phone": "+92 303 5116528",
-  "github": "https://github.com/aadilsal",
-  "portfolio": "https://aadilsalmanportfolio.vercel.app/",
   "role": "Full Stack Engineer",
-  "heroAvatar": "/lottie/p.jpg",
-  "summary": "I design and build production web and AI systems—full stack from APIs and data to UX—for teams that need reliability, not demos. Experienced with scalable apps, RAG and LLM integrations, MLOps-style pipelines, payments, and performance-minded delivery.",
-  "availability": "Open to senior full-time roles and selective consulting on product builds and AI integrations.",
+  "location": "Lahore, Pakistan",
+  "timezone": "UTC+5",
+  "siteUrl": "https://aadilsalmanportfolio.vercel.app",
+  "sourceUrl": "https://github.com/aadilsal/portfolio-website",
+  "portrait": "/avatar.jpg",
+  "status": "Open to full-stack and AI roles, remote or Lahore",
+  "headline": "I ship full-stack products with",
+  "headlineAccent": "AI built in.",
+  "intro": "Booking platforms, voice receptionists, research agents and payment systems. I work across Next.js, Node and Python, and you can open the live versions below.",
+  "metaDescription": "Full-stack engineer in Lahore building AI products end to end: booking platforms, voice receptionists, research agents and payment integrations. Next.js, Node and Python.",
   "contact": {
     "email": "aadilsalman786@gmail.com",
     "github": "https://github.com/aadilsal",
     "githubHandle": "aadilsal",
+    "linkedin": "https://www.linkedin.com/in/aadilsalman",
     "whatsapp": "923035116528"
   },
-  "skills": {
-    "frontend": [
-      "JavaScript",
-      "TypeScript",
-      "React.js",
-      "Next.js",
-      "HTML5",
-      "CSS3",
-      "Responsive Design",
-      "Shadcn UI"
-    ],
-    "backend": [
-      "Node.js",
-      "Django",
-      "ASP.NET",
-      "REST APIs",
-      "Microservices",
-      "MongoDB",
-      "MS SQL Server",
-      "Python",
-      "C#",
-      "SQL"
-    ],
-    "ai": [
-      "Machine Learning",
-      "LLMs",
-      "RAG",
-      "FAISS",
-      "Predictive Modeling",
-      "Chatbots",
-      "Voice Assistants"
-    ],
-    "cloud": [
-      "Model Deployment",
-      "Automated Retraining",
-      "AWS",
-      "CI/CD",
-      "Docker",
-      "Git",
-      "Linux",
-      "Jira",
-      "Agile/Scrum",
-      "Testing"
-    ]
-  },
+  "proof": [
+    { "value": "3", "label": "payment gateways integrated in production: Stripe, Chase and KuickPay" },
+    { "value": "3", "label": "of my builds are deployed for you to open and try" },
+    { "value": "2023", "label": "the year I started writing production code, as an intern" },
+    { "value": "BS CS", "label": "FAST-NUCES Lahore, class of 2026, finished while working full time" }
+  ],
   "experience": [
     {
-      "company": "ILMVERSITY (Da1ilmverse)",
-      "role": "Associate Software Engineer",
-      "duration": "Oct 2025 – Present",
+      "id": "ilmversity",
+      "company": "Ilmversity",
+      "role": "Full Stack Engineer",
+      "dates": "Oct 2025 to now",
+      "place": "Lahore",
+      "summary": "A multi-tenant school management platform.",
       "points": [
-        "Built full-stack web applications using React, Next.js, and Node.js delivering seamless user experiences",
-        "Developed chatbots and voice assistants to enhance engagement and automate support",
-        "Integrated Stripe, Chase Bank, and KuickPay improving payment reliability",
-        "Optimized frontend performance and backend APIs to improve speed and responsiveness",
-        "Created reusable UI components and scalable design patterns",
-        "Collaborated with cross-functional teams to deliver production-grade features"
+        "Integrated Stripe, Chase and KuickPay into three payment flows, cutting failed payments by about 25%.",
+        "Built an LLM chatbot and a voice assistant that now handle about 40% of support questions without a person.",
+        "Cut page load time by about 35% with frontend optimisation and API caching.",
+        "Built a shared library of 15+ React components that the team reuses across features."
       ]
     },
     {
+      "id": "fiveriver",
       "company": "Fiveriver Technologies",
       "role": "Web Development Intern",
-      "duration": "Jul 2023 – Mar 2024",
+      "dates": "Jul 2023 to Mar 2024",
+      "place": "Internship",
       "points": [
-        "Built responsive frontend features using JavaScript and React",
-        "Developed API-driven applications with MongoDB backend",
-        "Refactored legacy code and implemented unit testing to reduce technical debt"
+        "Shipped responsive React features against a MongoDB-backed API.",
+        "Refactored legacy code and added unit tests, cutting bug tickets by about 20%."
       ]
     }
   ],
-  "projects": [
-    {
-      "name": "ApexFlow",
-      "tagline": "Real-time MLOps Platform inspired by Formula 1 systems",
-      "description": "End-to-end MLOps system for real-time lap-time prediction with automated retraining and low-latency inference.",
-      "features": [
-        "Real-time prediction pipeline",
-        "Automated retraining system",
-        "Low-latency inference architecture",
-        "High reliability under time-sensitive conditions"
-      ],
-      "category": "AI / MLOps"
-    },
-    {
-      "name": "LegalMindRAG",
-      "tagline": "AI-powered legal intelligence system",
-      "description": "RAG-based system combining FAISS vector search with LLMs to provide accurate, source-grounded legal answers.",
-      "features": [
-        "Vector search with FAISS",
-        "LLM-powered responses",
-        "Source-grounded answer generation"
-      ],
-      "category": "AI / NLP"
-    },
-    {
-      "name": "Finbotics",
-      "tagline": "AI-driven financial analytics platform",
-      "description": "Full-stack analytics dashboard integrating machine learning forecasts for actionable insights.",
-      "features": [
-        "Interactive dashboards",
-        "ML-based forecasting",
-        "Data visualization"
-      ],
-      "category": "Full Stack / AI"
-    },
-    {
-      "name": "MotorAI",
-      "tagline": "Intelligent AI-powered car marketplace",
-      "description": "Marketplace platform with image-based car analysis, intelligent search, and admin tooling.",
-      "features": [
-        "AI-based image analysis",
-        "Advanced search system",
-        "Admin dashboard"
-      ],
-      "category": "AI / Full Stack"
-    }
+  "about": [
+    "I'm a full-stack engineer in Lahore. I finished my computer science degree at FAST-NUCES in 2026 while working full time, and I build my own products in the evenings.",
+    "Most of my recent work puts a language model somewhere in the path, with guardrails so it stays useful: read-only SQL, answers limited to a catalog, a human handoff when a call gets clinical."
   ],
-  "education": [
-    {
-      "institution": "National University of Computer & Emerging Sciences (FAST), Lahore",
-      "degree": "BS Computer Science",
-      "duration": "Aug 2022 – Jun 2026"
-    },
-    {
-      "institution": "Lahore Grammar School, Johar Town",
-      "degree": "A Levels",
-      "duration": "Aug 2020 – Jun 2022"
-    },
-    {
-      "institution": "Beaconhouse School System, Garden Town",
-      "degree": "O Levels",
-      "duration": "Aug 2017 – Jun 2020"
-    }
-  ],
+  "education": {
+    "degree": "BS Computer Science",
+    "institution": "FAST-NUCES Lahore",
+    "dates": "2022 to 2026"
+  },
   "certifications": [
     "AWS Academy Cloud Foundations",
-    "Digital Skills: Artificial Intelligence (FutureLearn)"
+    "Digital Skills: Artificial Intelligence, FutureLearn"
   ]
 }

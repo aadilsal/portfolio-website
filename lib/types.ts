@@ -1,91 +1,93 @@
-export type CaseStudy = {
-  repo: string;
-  repoUrl: string;
-  title: string;
-  tagline: string;
-  category: string;
-  problem: string;
-  role: string;
-  approach: string;
-  stack: string[];
-  outcome: string;
-};
-
 export type Resume = {
   name: string;
   role: string;
-  summary: string;
-  location?: string;
-  /** One line for senior roles + freelance (shown under summary when set). */
-  availability?: string;
-  /** Local path (e.g. `/avatar.jpg`) or image URL for hero / nav avatar */
-  heroAvatar?: string;
-  skills: {
-    frontend: string[];
-    backend: string[];
-    ai: string[];
-    cloud: string[];
-  };
-  experience: {
-    company: string;
-    role: string;
-    duration: string;
-    points: string[];
-  }[];
-  education: {
-    institution: string;
-    degree: string;
-    duration: string;
-  }[];
-  certifications: string[];
-  metrics?: {
-    yearsExperience: number;
-    projectsBuiltNote?: string;
-  };
-  /** Root-level fallbacks if `contact` is omitted */
-  email?: string;
-  github?: string;
-  contact?: {
+  location: string;
+  timezone: string;
+  siteUrl: string;
+  sourceUrl: string;
+  portrait: string;
+  status: string;
+  headline: string;
+  headlineAccent: string;
+  intro: string;
+  metaDescription: string;
+  contact: {
     email: string;
     github: string;
     githubHandle: string;
-    linkedin?: string;
-    /** WhatsApp number, digits only (e.g. 923035116528 for Pakistan). */
-    whatsapp?: string;
+    linkedin: string;
+    /** Digits only, e.g. 923035116528 */
+    whatsapp: string;
   };
-  /** Shown when GitHub API returns no repos (e.g. rate limit, offline). */
-  projects?: {
-    name: string;
-    tagline?: string;
-    description: string;
-    features?: string[];
-    category?: string;
+  proof: { value: string; label: string }[];
+  experience: {
+    id: string;
+    company: string;
+    role: string;
+    dates: string;
+    place: string;
+    summary?: string;
+    points: string[];
   }[];
+  about: string[];
+  education: { degree: string; institution: string; dates: string };
+  certifications: string[];
 };
 
-export type ProjectMetaEntry = {
-  featured?: boolean;
-  title?: string;
-  category?: string;
-  priority?: number;
-};
+export type Tier = "Production" | "Proficient" | "Working";
+export type SkillGroup = "frontend" | "backend" | "ai" | "cloud";
 
-export type ProjectsMeta = Record<string, ProjectMetaEntry>;
-
-export type GitHubRepo = {
-  id: number;
+export type Skill = {
   name: string;
-  description: string | null;
-  html_url: string;
-  stargazers_count: number;
-  updated_at: string;
-  fork: boolean;
-  topics?: string[];
-  language: string | null;
+  group: SkillGroup;
+  level: 2 | 3 | 4 | 5;
+  tier: Tier;
+  proof: string;
+  /** A section anchor or /work/<slug> */
+  proofHref?: string;
 };
 
-export type MergedProject = GitHubRepo & {
-  displayTitle: string;
-  category: string | null;
-  meta: ProjectMetaEntry | undefined;
+export type Media = {
+  type: "image" | "video";
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+export type CaseStudy = {
+  role: string;
+  timeline: string;
+  scale: string;
+  /** Paragraphs */
+  problem: string[];
+  features: { title: string; body: string; media?: Media }[];
+  diagram: {
+    caption: string;
+    nodes: { id: string; title: string; note: string; accent?: boolean }[];
+    edges: [string, string][];
+  };
+  decisions: { title: string; why: string; tradeoff: string }[];
+  results: { value: string; label: string }[];
+  /** Slug of the next case study */
+  next: string;
+};
+
+export type Project = {
+  slug: string;
+  title: string;
+  kind: "Client build" | "Production build" | "My own product" | "Personal project";
+  status: "Live" | "Pre-launch" | "Code and write-up" | "Code only";
+  /** One sentence */
+  summary: string;
+  /** Two-sentence summary for the case study header */
+  longSummary?: string;
+  /** Three bullets, flagships only */
+  outcomes: string[];
+  stack: string[];
+  links: { live?: string; liveLabel?: string; code: string };
+  cover?: Media;
+  hero?: Media;
+  featured: boolean;
+  caseStudy?: CaseStudy;
 };

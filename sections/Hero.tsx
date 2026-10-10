@@ -1,65 +1,52 @@
-import { Container } from "@/components/Container";
-import { HeroAvatar } from "@/components/HeroAvatar";
-import { HeroSpotlight } from "@/components/HeroSpotlight";
-import { HeroTyping } from "@/components/HeroTyping";
-import { Button } from "@/components/ui/button";
-import type { Resume } from "@/lib/types";
+import { Assistant } from "@/components/Assistant";
+import { sources } from "@/lib/assistant";
+import { links, resume } from "@/lib/site";
 
-const TYPING_LINE =
-  "Production web · AI & RAG · MLOps · Payments · Race-ready delivery";
+const order = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
-export function Hero({ resume }: { resume: Resume }) {
+export function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-[85vh] flex flex-col justify-center py-24 overflow-hidden"
-    >
-      <div className="pointer-events-none absolute inset-0 grid-overlay opacity-60" />
-      <Container>
-        <div className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(260px,360px)] lg:gap-12">
-          <div className="relative max-w-3xl space-y-6">
-            <p className="font-mono text-xs uppercase tracking-[0.35em] text-muted-foreground">
-              Overview
-            </p>
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
-              <HeroAvatar resume={resume} priority />
-              <div className="min-w-0 flex-1 space-y-5">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-balance">
-                  {(() => {
-                    const parts = resume.name.trim().split(/\s+/);
-                    if (parts.length < 2) {
-                      return <span className="text-accent">{resume.name}</span>;
-                    }
-                    const last = parts.pop()!;
-                    return (
-                      <>
-                        {parts.join(" ")}{" "}
-                        <span className="text-accent">{last}</span>
-                      </>
-                    );
-                  })()}
-                </h1>
-                <p className="text-lg text-muted-foreground">{resume.role}</p>
-              </div>
-            </div>
-            <HeroTyping text={TYPING_LINE} />
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Button asChild>
-                <a href="#case-studies">Selected work</a>
-              </Button>
-              <Button variant="secondary" asChild>
-                <a href="#contact">Get in touch</a>
-              </Button>
-              <Button variant="ghost" asChild className="font-mono text-xs">
-                <a href="#driver">Profile</a>
-              </Button>
-            </div>
-          </div>
-          <div className="flex justify-center lg:justify-end">
-            <HeroSpotlight resume={resume} />
-          </div>
+    <section id="top" aria-labelledby="hero-title" className="page grid gap-12 pb-16 pt-14 md:pt-24 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+      <div>
+        <p className="enter flex items-center gap-2.5 font-mono text-[12px] text-text-muted" style={order(0)}>
+          <span aria-hidden="true" className="h-2 w-2 rounded-full bg-live" />
+          {resume.status}
+        </p>
+        <h1 id="hero-title" className="enter h-page mt-6 max-w-[13ch]" style={order(1)}>
+          {resume.headline} <span className="accent-wipe text-accent">{resume.headlineAccent}</span>
+        </h1>
+        <p className="enter lead mt-6 max-w-[46ch]" style={order(2)}>
+          {resume.intro}
+        </p>
+        <div className="enter mt-8 flex flex-col gap-3 sm:flex-row" style={order(3)}>
+          <a href="#work" className="btn btn-primary">
+            See the work
+          </a>
+          <a href="#contact" className="btn btn-secondary">
+            Get in touch
+          </a>
         </div>
-      </Container>
+        <ul className="enter mt-6 flex flex-wrap gap-x-6 font-mono text-[12px] text-text-muted" style={order(4)}>
+          <li>
+            <a href={links.github} className="text-link" data-event="contact_click" data-label="github">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href={links.linkedin} className="text-link" data-event="contact_click" data-label="linkedin">
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href={links.email} className="text-link" data-event="contact_click" data-label="email">
+              {resume.contact.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div className="enter" style={order(5)}>
+        <Assistant sources={sources} email={resume.contact.email} />
+      </div>
     </section>
   );
 }

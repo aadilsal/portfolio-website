@@ -1,65 +1,40 @@
-"use client";
+import { Reveal } from "@/components/Reveal";
+import { SectionHeader } from "@/components/SectionHeader";
+import { resume } from "@/lib/site";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { Container } from "@/components/Container";
-import type { Resume } from "@/lib/types";
-
-const inView = {
-  once: true,
-  amount: 0.15,
-  margin: "0px 0px 120px 0px",
-} as const;
-
-export function Experience({ resume }: { resume: Resume }) {
-  const reduceMotion = useReducedMotion();
-
+export function Experience() {
   return (
-    <section id="experience" className="py-24 scroll-mt-20">
-      <Container>
-        <div className="mb-10 flex flex-col gap-2">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-secondary">
-            Race history
-          </span>
-          <h2 className="text-3xl font-semibold tracking-tight">Experience</h2>
-          <p className="max-w-2xl text-muted-foreground">
-            Roles where I owned delivery across the stack: product-facing
-            features, integrations, AI assistants, payments, and performance.
-          </p>
-        </div>
-        <ol className="relative space-y-8 border-l border-border pl-8">
-          {resume.experience.map((job, index) => (
-            <motion.li
-              key={`${job.company}-${index}`}
-              initial={reduceMotion ? false : { y: 20, opacity: 1 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={inView}
-              transition={{
-                duration: reduceMotion ? 0 : 0.4,
-                delay: reduceMotion ? 0 : index * 0.08,
-              }}
-              className="relative"
-            >
-              <span className="absolute -left-[9px] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-accent shadow-glow" />
-              <div className="panel-border p-5 sm:p-6">
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="text-lg font-semibold">{job.role}</h3>
-                  <span className="font-mono text-xs text-secondary">
-                    {job.duration}
-                  </span>
-                </div>
-                <p className="mt-1 font-mono text-sm text-muted-foreground">
-                  {job.company}
-                </p>
-                <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-muted-foreground">
-                  {job.points.map((pt) => (
-                    <li key={pt}>{pt}</li>
+    <section id="experience" aria-labelledby="experience-title" className="section page">
+      <SectionHeader id="experience-title" number="03" label="Experience" title="Where I have shipped." />
+      <ol className="mt-10 border-b border-line">
+        {resume.experience.map((job) => (
+          <li key={job.id} className="border-t border-line py-10">
+            <Reveal className="grid gap-4 md:grid-cols-[180px_1fr] md:gap-10">
+              <p className="font-mono text-[12px] leading-relaxed text-text-dim">
+                {job.dates}
+                <br />
+                <span className="text-text-muted">{job.place}</span>
+              </p>
+              <div>
+                <h3 className="font-display text-[24px] font-semibold leading-tight">
+                  {job.role}, {job.company}
+                </h3>
+                {job.summary ? <p className="mt-2 text-text-muted">{job.summary}</p> : null}
+                <ul className="mt-4 space-y-2.5">
+                  {job.points.map((p) => (
+                    <li key={p} className="flex gap-3 text-[16px] leading-snug">
+                      <span aria-hidden="true" className="text-accent">
+                        →
+                      </span>
+                      <span>{p}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
-            </motion.li>
-          ))}
-        </ol>
-      </Container>
+            </Reveal>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
