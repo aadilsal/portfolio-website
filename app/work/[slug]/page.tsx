@@ -5,14 +5,15 @@ import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
 import { StatusLine } from "@/components/ProjectFeature";
 import { Reveal } from "@/components/Reveal";
 import { ScreenshotFrame } from "@/components/ScreenshotFrame";
-import { flagships, getProject } from "@/data/projects";
+import { flagships, getProject, projects } from "@/data/projects";
 
 type Params = { params: { slug: string } };
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return flagships.map((p) => ({ slug: p.slug }));
+  // Every written-up project keeps its page, including ones no longer on the homepage.
+  return projects.filter((p) => p.caseStudy).map((p) => ({ slug: p.slug }));
 }
 
 export function generateMetadata({ params }: Params): Metadata {
@@ -43,7 +44,7 @@ export default function CaseStudyPage({ params }: Params) {
           ← All work
         </Link>
         <div className="enter mt-6 flex items-center gap-3 font-mono text-[12px]" style={v(0)}>
-          <span className="text-accent">Case study {String(index).padStart(2, "0")}</span>
+          <span className="text-accent">Case study{index > 0 ? ` ${String(index).padStart(2, "0")}` : ""}</span>
           <StatusLine project={p} />
         </div>
         <h1 className="enter h-page mt-4" style={v(1)}>
@@ -67,6 +68,16 @@ export default function CaseStudyPage({ params }: Params) {
       {p.hero ? (
         <div className="enter mt-12" style={v(4)}>
           <ScreenshotFrame media={p.hero} transitionName={`shot-${p.slug}`} sizes="(min-width: 1200px) 1136px, 100vw" ratio="16/9" priority />
+          {p.hero.transcript ? (
+            <details className="mt-3 text-[14px] text-text-muted">
+              <summary className="cursor-pointer font-mono text-[12px] text-text-dim">Read the narration</summary>
+              <ol className="mt-3 max-w-[62ch] space-y-2">
+                {p.hero.transcript.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ol>
+            </details>
+          ) : null}
         </div>
       ) : (
         <div className="enter mt-12" style={v(4)}>

@@ -27,17 +27,17 @@ Full Stack Engineer in Lahore, Pakistan. Booking platforms, voice receptionists,
 
 ## Selected work
 
-### 01 · Junket Tours: a tour booking platform for adventure travel in Pakistan
+### 01 · Local AI Anti-Spam: contact-form spam filtering on the site's own server
 
-Client build · **[Live site](https://touragency-wheat.vercel.app)** · [Case study](https://aadilsalmanportfolio.vercel.app/work/junket-tours)
+My own product, beta · [Code](https://github.com/aadilsal/Local-AI-Anti-Spam) · [Case study and demo video](https://aadilsalmanportfolio.vercel.app/work/local-ai-anti-spam)
 
-<img src="public/work/junket-tours/home.webp" alt="Junket Tours homepage" width="100%" />
+<img src="public/work/local-ai-anti-spam/cover.png" alt="Local AI Anti-Spam quarantine page in wp-admin" width="100%" />
 
-- Guests book a tour without creating an account.
-- Staff run tours, bookings, users and the blog from one realtime admin panel.
-- An AI trip planner builds itineraries only from tours that are in the catalog.
+- Scores every Contact Form 7, WPForms and comment submission locally, in 3.5 ms at worst.
+- Holds spam in a 30-day quarantine. One click delivers a real message, notification email included.
+- Shows the score and the words behind every verdict.
 
-`Next.js 14` `Convex` `Groq` `Resend` `Tailwind CSS`
+`Python` `scikit-learn` `PHP` `WordPress` `MiniLM` `GitHub Actions`
 
 ### 02 · DentalAI Receptionist: an AI receptionist for dental clinics
 
@@ -65,6 +65,7 @@ Personal project · [Code](https://github.com/aadilsal/ApexFlow) · [Case study]
 
 | Project | What it does | Stack |
 |---|---|---|
+| [Junket Tours](https://touragency-wheat.vercel.app) | A tour booking and operations platform for adventure travel in Pakistan. | Next.js 14 · Convex · Groq · Resend |
 | [ResearchOS](https://research-os-taupe.vercel.app) | Four AI agents plan, search, read and write a research report while you watch the progress live. | Next.js 14 · Convex · LangGraph · Clerk |
 | [InsightOS](https://github.com/aadilsal/Insight-OS) | Ask a question in plain English and get a read-only SQL query and a finance-style summary back. | TypeScript · SQL · LLM |
 | [Churn Predictor](https://github.com/aadilsal/Churn-Predictor) | Churn risk scores with the reasons behind each one, served over an API with a dashboard. | XGBoost · SHAP · FastAPI · Streamlit |

@@ -2,7 +2,150 @@ import type { Project } from "@/lib/types";
 
 const GH = "https://github.com/aadilsal";
 
+const LAAS = "/work/local-ai-anti-spam";
+
 export const projects: Project[] = [
+  {
+    slug: "local-ai-anti-spam",
+    title: "Local AI Anti-Spam",
+    kind: "My own product",
+    status: "Beta",
+    summary:
+      "A WordPress plugin that filters contact-form spam with a machine-learning model running on the site's own server.",
+    longSummary:
+      "A WordPress plugin that filters contact-form and comment spam with a model I trained in Python and run in plain PHP. No CAPTCHA, no API key, and no message ever leaves the site.",
+    outcomes: [
+      "Scores every Contact Form 7, WPForms and comment submission locally, in 3.5 ms at worst.",
+      "Holds spam in a 30-day quarantine. One click delivers a real message, notification email included.",
+      "Shows the score and the words behind every verdict.",
+    ],
+    stack: ["Python", "scikit-learn", "PHP", "WordPress", "MiniLM", "GitHub Actions"],
+    links: { code: `${GH}/Local-AI-Anti-Spam` },
+    cover: {
+      type: "image",
+      src: `${LAAS}/cover.png`,
+      alt: "The plugin's quarantine page in wp-admin, listing six held spam messages with their scores and the words that drove each verdict",
+      width: 2880,
+      height: 1800,
+    },
+    hero: {
+      type: "video",
+      src: `${LAAS}/demo.mp4`,
+      poster: `${LAAS}/poster.png`,
+      controls: true,
+      alt: "A 47-second narrated demo of Local AI Anti-Spam",
+      width: 1920,
+      height: 1080,
+      transcript: [
+        "Contact form spam, stopped on your own server.",
+        "Small businesses lose real leads to spam filters. CAPTCHAs annoy customers, and cloud filters read every message.",
+        "Local AI Anti-Spam holds spam in a quarantine. Nothing is deleted, and one click delivers anything real.",
+        "Every decision shows its score and the words behind it.",
+        "On a test site, six of six genuine enquiries got through. Six of seven spam messages were held, and the unsure one was delivered with a warning tag.",
+        "The model was trained from scratch in Python, and runs inside WordPress in PHP, matching to four decimal places.",
+        "Free, private, and open source. Now in beta.",
+      ],
+    },
+    featured: true,
+    caseStudy: {
+      role: "Product, data, model training, PHP plugin and CI",
+      timeline: "Oct 2026 to now",
+      scale: "Beta 0.1.0, CI on PHP 7.4 to 8.3",
+      problem: [
+        "Contact-form spam is now written by cheap language models: fluent, unique enquiries that pass CAPTCHAs, honeypots and keyword rules. The filters that can read them, like Akismet and CleanTalk, send every visitor's message to their own cloud and charge per check.",
+        "I wanted a filter that reads the message, runs on ordinary shared hosting, sends nothing off the site and never silently loses a real lead.",
+      ],
+      features: [
+        {
+          title: "A quarantine instead of a delete button",
+          body: "Spam is held for 30 days, never deleted on arrival. Releasing a message delivers it exactly as it would have been, notification email included, and can add the sender to an allow list. If anything fails, such as a missing model file, the message is delivered.",
+          media: {
+            type: "image",
+            src: `${LAAS}/quarantine.png`,
+            alt: "Quarantine list with sender, message, form, score and the words behind each verdict",
+            width: 2520,
+            height: 1596,
+          },
+        },
+        {
+          title: "Every verdict explains itself",
+          body: "Each held message shows its score, the threshold it crossed and the words that pushed it towards spam. A site owner can see why something was held before deciding to release it.",
+          media: {
+            type: "image",
+            src: `${LAAS}/reason.png`,
+            alt: "Why this was held: the model scored the message 1.00, above the 0.97 threshold, with the words that drove it",
+            width: 2520,
+            height: 1096,
+            fit: "contain",
+            background: "#f0f0f1",
+          },
+        },
+        {
+          title: "Trained in Python, served in plain PHP",
+          body: "A logistic regression on hashed word and character n-grams plus link and sender features, trained on 96,549 licence-checked rows. A custom featurizer uses crc32 hashing in both languages, and shared fixtures prove PHP and Python agree to four decimal places. PHP reads only the weights a message touches, straight from a 2.1 MB file.",
+          media: {
+            type: "image",
+            src: `${LAAS}/how.png`,
+            alt: "Trained in Python, runs in PHP, same score to four decimal places",
+            width: 1920,
+            height: 1080,
+          },
+        },
+        {
+          title: "Rules the owner controls",
+          body: "Allow and block lists for emails, domains, IPs and phrases run before the model. If a message matches both lists, allow wins.",
+          media: {
+            type: "image",
+            src: `${LAAS}/rules.png`,
+            alt: "Rules page with always-allow and always-block lists",
+            width: 2520,
+            height: 1072,
+            fit: "contain",
+            background: "#f0f0f1",
+          },
+        },
+      ],
+      diagram: {
+        caption: "Every check runs inside WordPress. The model is trained offline and ships as a file in the plugin.",
+        nodes: [
+          { id: "form", title: "Form or comment", note: "CF7, WPForms, comments" },
+          { id: "rules", title: "Allow and block lists", note: "checked first" },
+          { id: "model", title: "Local model in PHP", note: "2.1 MB, 3.5 ms worst case", accent: true },
+          { id: "inbox", title: "Delivered", note: "unsure ones tagged" },
+          { id: "quarantine", title: "Quarantine", note: "30 days, one-click release" },
+        ],
+        edges: [
+          ["form", "rules"],
+          ["rules", "model"],
+          ["model", "inbox"],
+          ["model", "quarantine"],
+        ],
+      },
+      decisions: [
+        {
+          title: "A small linear model instead of a transformer",
+          why: "It has to run on cheap shared hosting with no extensions. A hashed logistic regression scores an 8 KB message in 3.5 ms (p95) with about 8 MB of extra memory, and CI fails the build past 20 ms or 16 MB.",
+          tradeoff: "Trade-off: less accuracy than the MiniLM model I also trained. That one is kept for an optional cloud second opinion on unsure messages.",
+        },
+        {
+          title: "Fail open, hold instead of delete",
+          why: "For a small business, a lost enquiry costs more than one spam email. Unsure messages are delivered with a [Possible spam] tag, errors deliver the message, and held mail waits 30 days.",
+          tradeoff: "Trade-off: some spam still reaches the inbox, tagged.",
+        },
+        {
+          title: "Evaluation that can't flatter itself",
+          why: "Splits are grouped by source and by synthetic template, so test styles are never seen in training, and synthetic text is reweighted so the generator's style can't become a spam signal.",
+          tradeoff: "Trade-off: lower headline numbers. They still come from public and synthetic data until real labelled traffic is collected.",
+        },
+      ],
+      results: [
+        { value: "0.33%", label: "of genuine messages held on the synthetic test set (95% CI 0.19 to 0.58%)" },
+        { value: "90.5%", label: "of spam caught at that rate. Not yet measured on real contact-form traffic" },
+        { value: "3.5 ms", label: "worst-case check in plain PHP (p95, 8 KB message)" },
+      ],
+      next: "dentalai-receptionist",
+    },
+  },
   {
     slug: "junket-tours",
     title: "Junket Tours",
@@ -32,7 +175,7 @@ export const projects: Project[] = [
       width: 2400,
       height: 1350,
     },
-    featured: true,
+    featured: false,
     caseStudy: {
       role: "Design, frontend, backend and deployment",
       timeline: "Apr 2026 to now",
@@ -303,7 +446,7 @@ export const projects: Project[] = [
         { value: "35", label: "commits" },
         { value: "Weekly", label: "retrain on the latest race" },
       ],
-      next: "junket-tours",
+      next: "local-ai-anti-spam",
     },
   },
 

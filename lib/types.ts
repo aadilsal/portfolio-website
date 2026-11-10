@@ -53,6 +53,15 @@ export type Media = {
   alt: string;
   width: number;
   height: number;
+  /** Video only: still shown before playback */
+  poster?: string;
+  /** Video only: a narrated demo with player controls and sound, instead of a silent loop */
+  controls?: boolean;
+  /** Video only: what the narration says, shown under the player */
+  transcript?: string[];
+  /** "contain" keeps a wide screenshot whole, pinned to the top, on `background` */
+  fit?: "cover" | "contain";
+  background?: string;
 };
 
 export type CaseStudy = {
@@ -77,7 +86,7 @@ export type Project = {
   slug: string;
   title: string;
   kind: "Client build" | "Production build" | "My own product" | "Personal project";
-  status: "Live" | "Pre-launch" | "Code and write-up" | "Code only";
+  status: "Live" | "Beta" | "Pre-launch" | "Code and write-up" | "Code only";
   /** One sentence */
   summary: string;
   /** Two-sentence summary for the case study header */

@@ -13,12 +13,23 @@ type Props = {
 };
 
 export function ScreenshotFrame({ media, transitionName, sizes, priority, ratio = "16/10", revealClip }: Props) {
+  const contain = media.fit === "contain";
   return (
     <div
       className={`relative overflow-hidden rounded-xl border border-line bg-surface ${revealClip ? "reveal-clip" : ""}`}
-      style={{ aspectRatio: ratio }}
+      style={{ aspectRatio: ratio, background: media.background }}
     >
-      {media.type === "video" ? (
+      {media.type === "video" && media.controls ? (
+        <video
+          src={media.src}
+          poster={media.poster}
+          aria-label={media.alt}
+          className="h-full w-full bg-black object-contain"
+          controls
+          playsInline
+          preload="metadata"
+        />
+      ) : media.type === "video" ? (
         <video
           src={media.src}
           aria-label={media.alt}
@@ -36,7 +47,7 @@ export function ScreenshotFrame({ media, transitionName, sizes, priority, ratio 
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover object-top"
+          className={contain ? "object-contain object-top" : "object-cover object-top"}
           style={transitionName ? { viewTransitionName: transitionName } : undefined}
         />
       )}
