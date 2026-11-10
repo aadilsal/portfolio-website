@@ -27,7 +27,10 @@ export function ProjectFeature({ project, index }: { project: Project; index: nu
       className="grid items-center gap-10 border-t border-line py-14 md:grid-cols-2 md:gap-12"
     >
       <Reveal className={flip ? "md:order-2" : ""}>
-        {project.cover ? (
+        {project.cover?.type === "video" && project.cover.controls ? (
+          // A player is clicked, so it can't sit inside the case-study link or the tilt.
+          <ScreenshotFrame media={project.cover} sizes="(min-width: 768px) 560px, 100vw" ratio="16/9" revealClip />
+        ) : project.cover ? (
           <TiltFrame>
             <Link href={caseHref} tabIndex={-1} aria-hidden="true" data-event="case_study_view" data-label={project.slug}>
               <ScreenshotFrame

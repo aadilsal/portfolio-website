@@ -22,11 +22,13 @@ export const projects: Project[] = [
     stack: ["Python", "scikit-learn", "PHP", "WordPress", "MiniLM", "GitHub Actions"],
     links: { code: `${GH}/Local-AI-Anti-Spam` },
     cover: {
-      type: "image",
-      src: `${LAAS}/cover.png`,
-      alt: "The plugin's quarantine page in wp-admin, listing six held spam messages with their scores and the words that drove each verdict",
-      width: 2880,
-      height: 1800,
+      type: "video",
+      src: `${LAAS}/demo.mp4`,
+      poster: `${LAAS}/poster.png`,
+      controls: true,
+      alt: "A 47-second narrated demo of Local AI Anti-Spam",
+      width: 1920,
+      height: 1080,
     },
     hero: {
       type: "video",
