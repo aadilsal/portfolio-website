@@ -51,21 +51,24 @@ My own product, pre-launch · **[Product site](https://voice-receptionist-dentai
 
 `Vapi` `Convex` `Next.js` `Google Calendar` `n8n` `Claude API`
 
-### 03 · ApexFlow: Formula 1 lap-time predictions that retrain every race week
+### 03 · Evident: architecture maps where every arrow cites a line of code
 
-Personal project · [Code](https://github.com/aadilsal/ApexFlow) · [Case study](https://aadilsalmanportfolio.vercel.app/work/apexflow)
+My own product, live · **[Map a repo](https://www.evident-pk.company)** · [Code](https://github.com/aadilsal/Evident) · [Case study](https://aadilsalmanportfolio.vercel.app/work/evident)
 
-- Airflow retrains weekly on new race data and promotes a model only if it beats the current one.
-- A FastAPI service returns each prediction with an uncertainty estimate.
-- Prometheus and Grafana watch accuracy and data drift.
+<img src="public/work/evident/map.png" alt="Evident system overview of an Express and MongoDB API" width="100%" />
 
-`Python` `XGBoost` `Airflow` `MLflow` `FastAPI` `Docker`
+- Facts come from tree-sitter parsing. Nothing in the analysed repo is installed, built or run.
+- Traces a request hop by hop and shows the blast radius of changing a model, with code for every step.
+- Ships as a hosted site, a CLI on PyPI and a skill for Claude Code, Codex and Cursor.
+
+`Python` `tree-sitter` `FastAPI` `Next.js` `React Flow` `Postgres` `Redis`
 
 ### More work
 
 | Project | What it does | Stack |
 |---|---|---|
 | [Junket Tours](https://touragency-wheat.vercel.app) | A tour booking and operations platform for adventure travel in Pakistan. | Next.js 14 · Convex · Groq · Resend |
+| [ApexFlow](https://github.com/aadilsal/ApexFlow) | A machine learning pipeline that predicts Formula 1 lap times and retrains itself every race week. | Python · XGBoost · Airflow · MLflow · FastAPI |
 | [ResearchOS](https://research-os-taupe.vercel.app) | Four AI agents plan, search, read and write a research report while you watch the progress live. | Next.js 14 · Convex · LangGraph · Clerk |
 | [InsightOS](https://github.com/aadilsal/Insight-OS) | Ask a question in plain English and get a read-only SQL query and a finance-style summary back. | TypeScript · SQL · LLM |
 | [Churn Predictor](https://github.com/aadilsal/Churn-Predictor) | Churn risk scores with the reasons behind each one, served over an API with a dashboard. | XGBoost · SHAP · FastAPI · Streamlit |

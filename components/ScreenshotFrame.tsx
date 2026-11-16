@@ -14,10 +14,12 @@ type Props = {
 
 export function ScreenshotFrame({ media, transitionName, sizes, priority, ratio = "16/10", revealClip }: Props) {
   const contain = media.fit === "contain";
+  // Portrait media (a phone-shaped launch video) keeps its own shape and a narrower frame.
+  const portrait = media.height > media.width;
   return (
     <div
-      className={`relative overflow-hidden rounded-xl border border-line bg-surface ${revealClip ? "reveal-clip" : ""}`}
-      style={{ aspectRatio: ratio, background: media.background }}
+      className={`relative overflow-hidden rounded-xl border border-line bg-surface ${portrait ? "mx-auto max-w-[400px]" : ""} ${revealClip ? "reveal-clip" : ""}`}
+      style={{ aspectRatio: portrait ? `${media.width}/${media.height}` : ratio, background: media.background }}
     >
       {media.type === "video" && media.controls ? (
         <video

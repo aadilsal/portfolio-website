@@ -366,7 +366,137 @@ export const projects: Project[] = [
         { value: "1", label: "backend deployment: Convex" },
         { value: "3", label: "kinds of call always handed to a person" },
       ],
-      next: "apexflow",
+      next: "evident",
+    },
+  },
+  {
+    slug: "evident",
+    title: "Evident",
+    kind: "My own product",
+    status: "Live",
+    summary:
+      "Architecture maps of a web app where every box and arrow links to the line of code that creates it.",
+    longSummary:
+      "Evident reads a codebase and maps its routes, middleware, database tables and external services. Every box and arrow cites a file, a line range and a commit, and if it can't point to a line, it doesn't draw it.",
+    outcomes: [
+      "Facts come from tree-sitter parsing. Nothing in the analysed repo is installed, built or run.",
+      "Traces a request hop by hop and shows the blast radius of changing a model, with code for every step.",
+      "Ships as a hosted site, a CLI on PyPI and a skill for Claude Code, Codex and Cursor.",
+    ],
+    stack: ["Python", "tree-sitter", "FastAPI", "Next.js", "React Flow", "Postgres", "Redis"],
+    links: {
+      live: "https://www.evident-pk.company",
+      liveLabel: "Map a repo on the live site",
+      code: `${GH}/Evident`,
+    },
+    cover: {
+      type: "image",
+      src: "/work/evident/map.png",
+      alt: "Evident's system overview of an Express and MongoDB API: routes, middleware, models, env vars and the edges between them",
+      width: 2880,
+      height: 1800,
+    },
+    hero: {
+      type: "image",
+      src: "/work/evident/map.png",
+      alt: "Evident's system overview of an Express and MongoDB API with layer filters and findings",
+      width: 2880,
+      height: 1800,
+    },
+    featured: true,
+    caseStudy: {
+      role: "Product, static-analysis engine, web app and benchmark",
+      timeline: "Nov 2026 to now",
+      scale: "57 commits, v0.3.0 on PyPI",
+      problem: [
+        "When you join a codebase or review a pull request in one you don't know, the first question is what talks to what. Which routes write to the User table? What breaks if I change Invoice? Is this endpoint behind auth?",
+        "AI diagram tools answer with an LLM's guess from the file tree. It looks convincing until you spot a service that doesn't exist, and coding agents make the same guesses when they edit code they haven't read. I wanted a map where every claim can be checked.",
+      ],
+      features: [
+        {
+          title: "Every edge has a receipt",
+          body: "Click any box or arrow to see the file, the line range and the highlighted code behind it, with a badge saying whether it was extracted from code or inferred by grouping. The request tracer follows a route through middleware, handler and service to the tables it touches.",
+          media: {
+            type: "image",
+            src: "/work/evident/trace.png",
+            alt: "Request tracer on POST /auth/sign-up, with the guarding middleware and the router code for lines 26 to 31",
+            width: 2880,
+            height: 1800,
+          },
+        },
+        {
+          title: "Blast radius before you change something",
+          body: "Select a model, file or env var and Evident lists everything that depends on it, hop by hop, with whether each one reads, writes or relates. Health checks flag things like a write route with no auth middleware or an env var missing from .env.example.",
+          media: {
+            type: "image",
+            src: "/work/evident/impact.png",
+            alt: "Blast radius of the User model: 52 nodes depend on it within 3 hops",
+            width: 2880,
+            height: 1800,
+          },
+        },
+        {
+          title: "Map any public repo",
+          body: "Paste a GitHub URL on the site and the engine shallow-clones it, parses it and serves the map. Results are cached per repo and commit, so the same commit is only analysed once.",
+          media: {
+            type: "image",
+            src: "/work/evident/landing.png",
+            alt: "Evident's homepage: Every arrow on this map has a receipt, with a real request trace from the gallery",
+            width: 2880,
+            height: 1800,
+          },
+        },
+        {
+          title: "Built for coding agents too",
+          body: "The engine is a CLI, evident-map on PyPI, with schema-valid JSON on every command. A skill makes Claude Code, Codex and Cursor run impact before editing a model and cite file:line instead of grepping. On 12 architecture questions run twice each with Claude Haiku, answers passed 24 of 24 times with the skill and 21 of 24 without.",
+          media: {
+            type: "video",
+            src: "/work/evident/launch.mp4",
+            alt: "22-second launch video for Evident",
+            width: 1080,
+            height: 1350,
+          },
+        },
+      ],
+      diagram: {
+        caption: "A six-stage engine. The LLM only labels nodes that already exist, and a validator rejects anything else.",
+        nodes: [
+          { id: "parse", title: "Repo, parsed", note: "tree-sitter, never run" },
+          { id: "adapters", title: "Adapters and linker", note: "routes, models, edges", accent: true },
+          { id: "group", title: "LLM grouping", note: "labels existing IDs only" },
+          { id: "web", title: "Web map", note: "Next.js, React Flow" },
+          { id: "cli", title: "CLI and agent skill", note: "trace, impact, health" },
+        ],
+        edges: [
+          ["parse", "adapters"],
+          ["adapters", "group"],
+          ["group", "web"],
+          ["group", "cli"],
+        ],
+      },
+      decisions: [
+        {
+          title: "A parser for facts, an LLM only for names",
+          why: "tree-sitter extracts the routes, middleware, models and calls. The LLM can only group and label nodes that already exist, and its output must reference real node IDs, so it can't invent a component.",
+          tradeoff: "Trade-off: the map only shows what static analysis can prove, so a route registered at runtime from a database won't appear.",
+        },
+        {
+          title: "One adapter per framework, not every language",
+          why: "Express mounts, NestJS modules, Django URLconfs and Flask blueprints each resolve differently. A dedicated adapter per framework, with its own fixtures and benchmark cases, is what makes a complete map possible.",
+          tradeoff: "Trade-off: Spring, Laravel, Rails, ASP.NET and Go stacks only get the generic module and service map for now.",
+        },
+        {
+          title: "Accuracy as a number CI enforces",
+          why: "A labelled benchmark of 15 repos, 7 of them public open-source apps, scores every engine change per category and per adapter. The build fails if any metric drops by more than 2 points.",
+          tradeoff: "Trade-off: every new adapter needs labelled repos before it ships. Labelling the public ones exposed real gaps, each now a regression test.",
+        },
+      ],
+      results: [
+        { value: "100%", label: "route precision and recall across 592 routes in the 15-repo benchmark" },
+        { value: "24/24", label: "agent answers passed with the Evident skill, vs 21/24 without" },
+        { value: "0", label: "lines of the analysed repo executed" },
+      ],
+      next: "local-ai-anti-spam",
     },
   },
   {
@@ -385,7 +515,7 @@ export const projects: Project[] = [
     ],
     stack: ["Python", "XGBoost", "Airflow", "MLflow", "FastAPI", "Docker"],
     links: { code: `${GH}/ApexFlow` },
-    featured: true,
+    featured: false,
     caseStudy: {
       role: "Data pipeline, modelling, serving and monitoring",
       timeline: "Dec 2025 to Mar 2026",
